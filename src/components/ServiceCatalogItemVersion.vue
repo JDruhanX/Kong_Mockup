@@ -28,7 +28,7 @@
 </template>
 
 <script setup  lang="ts">
-	import { defineProps, reactive, ref, Ref, computed } from 'vue';
+	import { defineProps } from 'vue';
 
 	import type { ServiceRecordVersion } from '@/types/service_catalog';
 
@@ -36,13 +36,18 @@
 	const props = defineProps <{ versions: ServiceRecordVersion[], type : string }>();
 
 	// Converts date to friendly.
-	const friendlyDate = ( updatedDateRaw ) =>
+	const friendlyDate = ( updatedDateRaw? : string ) =>
     {
-		const today = new Date();		
-		const updatedDate = new Date( updatedDateRaw );
-		const daysAgo = Math.ceil(( today - updatedDate ) / ( 1000 * 3600 * 24 ) );
+		if ( updatedDateRaw )
+		{
+			const today : Date = new Date();		
+			const updatedDate : Date = new Date( updatedDateRaw );
+			const daysAgo : number = Math.ceil(( today.valueOf() - updatedDate.valueOf() ) / ( 1000 * 3600 * 24 ) );
 
-		return daysAgo;
+			return daysAgo;
+		}
+
+		return null;		
 	};
 </script>
 
