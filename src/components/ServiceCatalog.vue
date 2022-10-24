@@ -25,7 +25,7 @@
 
 		<!-- Page: Services -->
 		<div class="services">
-			<div v-if="services.pageItems" class="items">
+			<div v-if="services?.pageItems && services.pageItems.length > 0" class="items">
 				<ServiceCatalogItem v-for="service in services.pageItems" :options="service" :key="service.id" />
 
 				<div v-if="loading" class="services-searching">
@@ -33,10 +33,14 @@
 					<span>Requesting Services ..</span>
 				</div>
 			</div>
+
+			<div class="items-not-found">
+				No services found
+			</div>
 		</div>
 
 		<!-- Zone: Pagination -->
-		<div class="pagination" v-if="services.pageItems">
+		<div class="pagination" v-if="services?.pageItems && services.pageItems.length > 0">
 			<span class="material-symbols-outlined arrow" :class="!services.isPrevious ? 'paginationDisabled' : ''" @click="previousPage">arrow_circle_left</span>
 
 			<div class="pagination-data">
@@ -288,6 +292,13 @@
 						margin-bottom: 12px;
 					}
 				}
+			}
+
+			.items-not-found
+			{
+				display: flex;
+				justify-content: center;
+				padding: 72px;
 			}
 		}
 
