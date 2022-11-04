@@ -34,7 +34,7 @@
 				</div>
 			</div>
 
-			<div class="items-not-found">
+			<div v-else class="items-not-found">
 				No services found
 			</div>
 		</div>
